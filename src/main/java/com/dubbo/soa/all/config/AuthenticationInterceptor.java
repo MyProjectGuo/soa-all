@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.method.HandlerMethod;
@@ -54,9 +55,12 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
 			// 判断是否存在令牌信息，如果存在，则允许登录
 			String accessToken = request.getHeader(ACCESS_TOKEN);
 			if (null == accessToken) {
-				throw new RuntimeException("无token，请重新登录");
+				throw new RuntimeException("登录失效");
 			}
 			String mobile = redisTemplate.opsForValue().get(accessToken);
+			if(StringUtils.isBlank(mobile)){
+				throw new RuntimeException("登录失效");
+			}
 			User user = userService.findByUserName(mobile);
 			if (user == null) {
 				throw new RuntimeException("用户不存在，请重新登录");
