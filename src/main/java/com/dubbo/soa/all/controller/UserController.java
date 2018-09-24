@@ -1,5 +1,7 @@
 package com.dubbo.soa.all.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -8,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.dubbo.soa.all.config.LoginRequired;
 import com.dubbo.soa.all.config.Result;
 import com.dubbo.soa.all.config.ServiceException;
+import com.dubbo.soa.all.constants.CurrentUserConstants;
 import com.dubbo.user.model.User;
 import com.dubbo.user.service.UserService;
 
@@ -21,7 +24,7 @@ public class UserController {
 	
 	@PostMapping("getUserById")
 	@LoginRequired
-	public Result<User> getUserById(Long id) throws ServiceException{
+	public Result<User> getUserById(Long id , HttpServletRequest request) throws ServiceException{
 		User user = userService.getUserById(1L);
 		return new Result(user);
 	}
