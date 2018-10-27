@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.dubbo.soa.all.config.LoginRequired;
 import com.dubbo.soa.all.config.Result;
 import com.dubbo.soa.all.config.ServiceException;
-import com.dubbo.soa.all.constants.CurrentUserConstants;
 import com.dubbo.user.model.User;
 import com.dubbo.user.service.UserService;
 
@@ -28,4 +27,12 @@ public class UserController {
 		User user = userService.getUserById(1L);
 		return new Result(user);
 	}
+	
+	
+	@PostMapping("send")
+	public Result<Boolean> send(){
+		userService.sendUserMQ();
+		return new Result(true);
+	}
+	
 }

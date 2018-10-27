@@ -70,7 +70,7 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
 			redisTemplate.opsForValue().set(accessToken, mobile, 604800, TimeUnit.SECONDS);
 			return true;
 		}
-		return false;
+		return true;
 	}
 
 	/**
