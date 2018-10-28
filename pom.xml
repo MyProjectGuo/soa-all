@@ -173,5 +173,15 @@
 		</plugins>
 	</build>
 
-
+	<distributionManagement>
+		<repository>
+			<id>releases</id><!--这个ID需要与你的release仓库的Repository ID一致 -->
+			<url>http://118.24.115.57:8081/nexus/content/repositories/releases/</url>
+		</repository>
+		<snapshotRepository>
+			<id>snapshots</id><!--这个ID需要与你的snapshots仓库的Repository ID一致 -->
+			<url>http://118.24.115.57:8081/nexus/content/repositories/snapshots/</url>
+		</snapshotRepository>
+	</distributionManagement>
+	
 </project>
