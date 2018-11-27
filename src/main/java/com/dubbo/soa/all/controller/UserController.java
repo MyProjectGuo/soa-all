@@ -22,7 +22,7 @@ public class UserController {
 	private UserService userService;
 	
 	@PostMapping("getUserById")
-	@LoginRequired
+	//@LoginRequired
 	public Result<User> getUserById(Long id , HttpServletRequest request) throws ServiceException{
 		User user = userService.getUserById(1L);
 		return new Result(user);
